@@ -1,22 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router";
 import { useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
 import PageMeta from "../../components/common/PageMeta";
 import { useAddBlogMutation, useUpdateBlogMutation, useGetBlogsQuery } from "../../store/api/apiSlice";
 import { toast } from "react-hot-toast";
-
-interface BlogItem {
-  id: string;
-  title: string;
-  category: string;
-  author: string;
-  coverImage: string;
-  content: string;
-  dateCreated: string;
-  readTime: string;
-  tags?: string[];
-}
 
 interface BlogInputs {
   title: string;
@@ -30,10 +17,8 @@ interface BlogInputs {
 export default function BlogForm() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const queryClient = useQueryClient();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const [keepAdding, setKeepAdding] = useState(false);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -220,16 +205,6 @@ export default function BlogForm() {
       const readTimeString = `${readTimeMinutes} min read`;
 
       const finalCover = data.coverImage.trim() || defaultCovers[data.category] || defaultCovers["Technology"];
-
-      const payload = {
-        title: data.title,
-        category: data.category,
-        author: data.author.trim() || "crconi digital",
-        coverImage: finalCover,
-        content: data.content,
-        readTime: readTimeString,
-        tags: data.tags || [],
-      };
 
       // 1. Submit real API request (visible in DevTools Network tab)
       if (id) {

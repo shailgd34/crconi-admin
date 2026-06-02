@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import PageMeta from "../../components/common/PageMeta";
 import { useGetBlogsQuery, useDeleteBlogMutation } from "../../store/api/apiSlice";
 import { toast } from "react-hot-toast";
@@ -42,7 +41,6 @@ const formatDate = (dateString?: string) => {
 // Dummy data removed. Prioritizing backend database.
 
 export default function BlogList() {
-  const queryClient = useQueryClient();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
   const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);

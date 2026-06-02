@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import PageMeta from "../../components/common/PageMeta";
 import { useGetCaseStudiesQuery, useDeleteCaseStudyMutation } from "../../store/api/apiSlice";
 import { toast } from "react-hot-toast";
@@ -40,7 +39,6 @@ const preSeededCases: CaseStudyItem[] = [
 ];
 
 export default function CaseStudyList() {
-  const queryClient = useQueryClient();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
   const [clientFilter, setClientFilter] = useState("");
@@ -85,7 +83,6 @@ export default function CaseStudyList() {
 
       toast.success("Case study deleted successfully!");
       setShowDeleteConfirm(null);
-      queryClient.invalidateQueries({ queryKey: ["casestudies"] });
     } catch (err: any) {
       console.error("Failed to delete case study:", err);
       toast.error(err.data?.message || err.message || "Failed to remove case study.");
