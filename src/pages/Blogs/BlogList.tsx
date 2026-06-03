@@ -225,7 +225,7 @@ export default function BlogList() {
                 {/* Header/Cover Section */}
                 <div className={`relative overflow-hidden shrink-0 ${isExpanded ? "h-64" : "h-44"}`}>
                   <img
-                    src={b.coverImage}
+                    src={b.cover_image || b.coverImage}
                     alt={b.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -249,7 +249,7 @@ export default function BlogList() {
                 <div className="flex flex-col flex-1 p-5.5">
                   <div className="flex items-center justify-between text-[10px] text-gray-400 font-extrabold uppercase tracking-wider mb-2">
                     <span>By {b.author}</span>
-                    <span>{b.readTime}</span>
+                    <span>{b.read_time || b.readTime}</span>
                   </div>
 
                   <h3 className={`text-base font-extrabold text-gray-900 dark:text-white leading-snug group-hover:text-brand-500 transition-colors ${isExpanded ? "text-lg mb-3" : "line-clamp-2"}`}>

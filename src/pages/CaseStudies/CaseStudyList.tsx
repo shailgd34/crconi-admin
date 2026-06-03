@@ -11,6 +11,7 @@ interface CaseStudyItem {
   client: string;
   year: string;
   coverImage: string;
+  cover_image?: string;
   content: string;
   dateCreated: string;
 }
@@ -257,7 +258,7 @@ export default function CaseStudyList() {
                 {/* Cover section */}
                 <div className={`relative overflow-hidden shrink-0 ${isExpanded ? "h-64" : "h-44"}`}>
                   <img
-                    src={c.coverImage}
+                    src={c.cover_image || c.coverImage}
                     alt={c.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
